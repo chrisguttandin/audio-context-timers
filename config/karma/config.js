@@ -63,7 +63,8 @@ module.exports = function (config) {
                     base: 'SauceLabs',
                     browserName: 'firefox',
                     platform: 'OS X 10.11',
-                    version: 'beta' // @todo Remove this again once version 50 is the default.
+                    // @todo Remove this again once version 50 is the default.
+                    version: 'beta'
                 },
                 SafariSauceLabs: {
                     base: 'SauceLabs',
