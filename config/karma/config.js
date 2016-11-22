@@ -45,31 +45,37 @@ module.exports = function (config) {
 
         config.set({
 
+            browserStack: {
+                accessKey: process.env.BROWSER_STACK_ACCESS_KEY,
+                username: process.env.BROWSER_STACK_USERNAME
+            },
+
             browsers: [
-                'ChromeSauceLabs',
-                'FirefoxSauceLabs',
-                'SafariSauceLabs'
+                'ChromeBrowserStack',
+                'FirefoxBrowserStack',
+                'SafariBrowserStack'
             ],
 
             captureTimeout: 120000,
 
             customLaunchers: {
-                ChromeSauceLabs: {
-                    base: 'SauceLabs',
-                    browserName: 'chrome',
-                    platform: 'OS X 10.11'
+                ChromeBrowserStack: {
+                    base: 'BrowserStack',
+                    browser: 'chrome',
+                    os: 'OS X',
+                    os_version: 'Sierra' // eslint-disable-line camelcase
                 },
-                FirefoxSauceLabs: {
-                    base: 'SauceLabs',
-                    browserName: 'firefox',
-                    platform: 'OS X 10.11',
-                    // @todo Remove this again once version 50 is the default.
-                    version: 'beta'
+                FirefoxBrowserStack: {
+                    base: 'BrowserStack',
+                    browser: 'firefox',
+                    os: 'OS X',
+                    os_version: 'Sierra' // eslint-disable-line camelcase
                 },
-                SafariSauceLabs: {
-                    base: 'SauceLabs',
-                    browserName: 'safari',
-                    platform: 'OS X 10.11'
+                SafariBrowserStack: {
+                    base: 'BrowserStack',
+                    browser: 'safari',
+                    os: 'OS X',
+                    os_version: 'Sierra' // eslint-disable-line camelcase
                 }
             },
 
