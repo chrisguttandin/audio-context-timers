@@ -1,4 +1,4 @@
-import { AudioContext } from 'standardized-audio-context';
+import { AudioContext, isSupported } from 'standardized-audio-context';
 
 const AUDIO_CONTEXT = new AudioContext();
 
@@ -60,6 +60,8 @@ export const clearTimeout = (id: number) => {
 export const clearInterval = (id: number) => {
     SCHEDULED_INTERVAL_FUNCTIONS.delete(id);
 };
+
+export { isSupported };
 
 export const setTimeout = (func: Function, delay: number) => {
     const id = generateUniqueId(SCHEDULED_TIMEOUT_FUNCTIONS);
