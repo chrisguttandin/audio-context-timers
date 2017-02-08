@@ -6,7 +6,7 @@ describe('module', () => {
 
         it('should not call the function after clearing the interval', (done) => {
             const id = audioContextTimers.setInterval(() => {
-                throw 'this should never be called';
+                throw new Error('this should never be called');
             }, 100);
 
             audioContextTimers.clearInterval(id);
@@ -18,7 +18,7 @@ describe('module', () => {
         it('should not call the function anymore after clearing the interval after the first callback', (done) => {
             let id = audioContextTimers.setInterval(() => {
                 if (id === null) {
-                    throw 'this should never be called';
+                    throw new Error('this should never be called');
                 }
 
                 audioContextTimers.clearInterval(id);
@@ -35,7 +35,7 @@ describe('module', () => {
 
         it('should not call the function after clearing the timeout', (done) => {
             const id = audioContextTimers.setTimeout(() => {
-                throw 'this should never be called';
+                throw new Error('this should never be called');
             }, 100);
 
             audioContextTimers.clearTimeout(id);
