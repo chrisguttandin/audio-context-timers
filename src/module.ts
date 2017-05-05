@@ -1,4 +1,5 @@
 import { AudioContext, isSupported } from 'standardized-audio-context';
+import { TFunctionMap, TTimerType } from './types';
 
 const AUDIO_CONTEXT = new AudioContext();
 
@@ -8,11 +9,11 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 
 const SAMPLE_DURATION = 2 / AUDIO_CONTEXT.sampleRate;
 
-const SCHEDULED_TIMEOUT_FUNCTIONS: Map<number, Function> = new Map();
+const SCHEDULED_TIMEOUT_FUNCTIONS: TFunctionMap = new Map();
 
-const SCHEDULED_INTERVAL_FUNCTIONS: Map<number, Function> = new Map();
+const SCHEDULED_INTERVAL_FUNCTIONS: TFunctionMap = new Map();
 
-const callIntervalFunction = (id, type) => {
+const callIntervalFunction = (id: number, type: TTimerType) => {
     const functions = (type === 'interval') ? SCHEDULED_INTERVAL_FUNCTIONS : SCHEDULED_TIMEOUT_FUNCTIONS;
 
     if (functions.has(id)) {
@@ -24,7 +25,7 @@ const callIntervalFunction = (id, type) => {
     }
 };
 
-const generateUniqueId = (map) => {
+const generateUniqueId = (map: TFunctionMap) => {
     let id = Math.round(Math.random() * MAX_SAFE_INTEGER);
 
     while (map.has(id)) {
@@ -34,7 +35,7 @@ const generateUniqueId = (map) => {
     return id;
 };
 
-const scheduleFunction = (id, delay, type) => {
+const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
     const now = performance.now();
 
     const audioBufferSourceNode = AUDIO_CONTEXT.createBufferSource();
