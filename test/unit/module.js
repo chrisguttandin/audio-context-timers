@@ -62,7 +62,6 @@ describe('module', () => {
 
         it('should constantly call a function with the given delay', (done) => {
             let before = performance.now();
-
             let calls = 0;
 
             function func () {
