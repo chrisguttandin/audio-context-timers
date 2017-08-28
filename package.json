@@ -4,6 +4,7 @@
     "url": "https://github.com/chrisguttandin/audio-context-timers/issues"
   },
   "dependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
     "standardized-audio-context": "^9.3.0",
     "tslint": "^5.7.0"
   },
