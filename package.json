@@ -4,7 +4,7 @@
     "url": "https://github.com/chrisguttandin/audio-context-timers/issues"
   },
   "dependencies": {
-    "standardized-audio-context": "^9.3.0"
+    "standardized-audio-context": "^9.3.1"
   },
   "description": "A replacement for setInterval() and setTimeout() which works in unfocused windows.",
   "devDependencies": {
