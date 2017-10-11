@@ -1,5 +1,7 @@
 # audio-context-timers
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/chrisguttandin/audio-context-timers.svg)](https://greenkeeper.io/)
+
 **A replacement for setInterval() and setTimeout() which works in unfocused windows.**
 
 [![tests](https://img.shields.io/travis/chrisguttandin/audio-context-timers/master.svg?style=flat-square)](https://travis-ci.org/chrisguttandin/audio-context-timers)
