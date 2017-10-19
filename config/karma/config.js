@@ -2,6 +2,8 @@ module.exports = (config) => {
 
     config.set({
 
+        concurrency: 2,
+
         files: [
             {
                 included: false,
