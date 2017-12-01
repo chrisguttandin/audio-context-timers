@@ -20,6 +20,10 @@ const callIntervalFunction = (id: number, type: TTimerType) => {
 
         if (func) {
             func();
+
+            if (type === 'timeout') {
+                SCHEDULED_TIMEOUT_FUNCTIONS.delete(id);
+            }
         }
     }
 };
