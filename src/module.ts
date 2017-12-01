@@ -43,25 +43,15 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
     audioBufferSourceNode.start(AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION);
 };
 
-export const clearTimeout = (id: number) => {
-    SCHEDULED_TIMEOUT_FUNCTIONS.delete(id);
-};
-
 export const clearInterval = (id: number) => {
     SCHEDULED_INTERVAL_FUNCTIONS.delete(id);
 };
 
-export { isSupported };
-
-export const setTimeout = (func: Function, delay: number) => {
-    const id = generateUniqueNumber(SCHEDULED_TIMEOUT_FUNCTIONS);
-
-    SCHEDULED_TIMEOUT_FUNCTIONS.set(id, func);
-
-    scheduleFunction(id, delay, 'timeout');
-
-    return id;
+export const clearTimeout = (id: number) => {
+    SCHEDULED_TIMEOUT_FUNCTIONS.delete(id);
 };
+
+export { isSupported };
 
 export const setInterval = (func: Function, delay: number) => {
     const id = generateUniqueNumber(SCHEDULED_INTERVAL_FUNCTIONS);
@@ -73,6 +63,16 @@ export const setInterval = (func: Function, delay: number) => {
     });
 
     scheduleFunction(id, delay, 'interval');
+
+    return id;
+};
+
+export const setTimeout = (func: Function, delay: number) => {
+    const id = generateUniqueNumber(SCHEDULED_TIMEOUT_FUNCTIONS);
+
+    SCHEDULED_TIMEOUT_FUNCTIONS.set(id, func);
+
+    scheduleFunction(id, delay, 'timeout');
 
     return id;
 };
