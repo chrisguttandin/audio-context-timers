@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "fast-unique-numbers": "^1.1.0",
     "standardized-audio-context": "^10.1.5",
     "tslib": "^1.8.0"
   },

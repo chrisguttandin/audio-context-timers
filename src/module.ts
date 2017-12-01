@@ -1,11 +1,10 @@
+import { generateUniqueNumber } from 'fast-unique-numbers';
 import { AudioContext, isSupported } from 'standardized-audio-context';
 import { TFunctionMap, TTimerType } from './types';
 
 const AUDIO_CONTEXT = new AudioContext();
 
 const AUDIO_BUFFER = AUDIO_CONTEXT.createBuffer(1, 2, AUDIO_CONTEXT.sampleRate);
-
-const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 
 const SAMPLE_DURATION = 2 / AUDIO_CONTEXT.sampleRate;
 
@@ -23,16 +22,6 @@ const callIntervalFunction = (id: number, type: TTimerType) => {
             func();
         }
     }
-};
-
-const generateUniqueId = (map: TFunctionMap) => {
-    let id = Math.round(Math.random() * MAX_SAFE_INTEGER);
-
-    while (map.has(id)) {
-        id = Math.round(Math.random() * MAX_SAFE_INTEGER);
-    }
-
-    return id;
 };
 
 const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
@@ -65,7 +54,7 @@ export const clearInterval = (id: number) => {
 export { isSupported };
 
 export const setTimeout = (func: Function, delay: number) => {
-    const id = generateUniqueId(SCHEDULED_TIMEOUT_FUNCTIONS);
+    const id = generateUniqueNumber(SCHEDULED_TIMEOUT_FUNCTIONS);
 
     SCHEDULED_TIMEOUT_FUNCTIONS.set(id, func);
 
@@ -75,7 +64,7 @@ export const setTimeout = (func: Function, delay: number) => {
 };
 
 export const setInterval = (func: Function, delay: number) => {
-    const id = generateUniqueId(SCHEDULED_INTERVAL_FUNCTIONS);
+    const id = generateUniqueNumber(SCHEDULED_INTERVAL_FUNCTIONS);
 
     SCHEDULED_INTERVAL_FUNCTIONS.set(id, () => {
         func();
