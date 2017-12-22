@@ -44,7 +44,7 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
         }
     };
     audioBufferSourceNode.connect(AUDIO_CONTEXT.destination);
-    audioBufferSourceNode.start(AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION);
+    audioBufferSourceNode.start(Math.max(0, AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION));
 };
 
 export const clearInterval = (id: number) => {
