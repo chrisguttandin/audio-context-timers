@@ -3,6 +3,11 @@
   "bugs": {
     "url": "https://github.com/chrisguttandin/audio-context-timers/issues"
   },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "fast-unique-numbers": "^1.1.3",
@@ -52,20 +57,20 @@
     "webpack": "^4.1.0"
   },
   "files": [
-    "build/es5/",
     "build/es2015/",
+    "build/es5/",
     "build/esm/",
     "src/"
   ],
   "homepage": "https://github.com/chrisguttandin/audio-context-timers",
   "keywords": [
+    "Web Audio API",
+    "WindowTimers",
     "clearInterval",
     "clearTimeout",
     "interval",
     "setInterval",
-    "setTimeout",
-    "Web Audio API",
-    "WindowTimers"
+    "setTimeout"
   ],
   "license": "MIT",
   "main": "build/es5/bundle.js",
