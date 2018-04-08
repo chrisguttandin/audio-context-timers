@@ -48,3 +48,7 @@ var timeoutId = audioContextTimers.setTimeout(() => {
 
 audioContextTimers.clearTimeout(timeoutId);
 ```
+
+However there are some subtle differences between AudioContextTimers and WindowTimers which are
+basically the same those of the [worker-timers](https://github.com/chrisguttandin/worker-timers)
+package.
