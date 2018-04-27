@@ -54,7 +54,7 @@ module.exports = (config) => {
             },
 
             browsers: [
-                'ChromeBrowserStack',
+                // @todo 'ChromeBrowserStack',
                 'FirefoxBrowserStack',
                 'SafariBrowserStack'
             ],
@@ -65,7 +65,6 @@ module.exports = (config) => {
                 ChromeBrowserStack: {
                     base: 'BrowserStack',
                     browser: 'chrome',
-                    flags: [ '--autoplay-policy=no-user-gesture-required' ],
                     os: 'OS X',
                     os_version: 'Sierra' // eslint-disable-line camelcase
                 },
