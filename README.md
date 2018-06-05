@@ -4,7 +4,7 @@
 
 [![tests](https://img.shields.io/travis/chrisguttandin/audio-context-timers/master.svg?style=flat-square)](https://travis-ci.org/chrisguttandin/audio-context-timers)
 [![dependencies](https://img.shields.io/david/chrisguttandin/audio-context-timers.svg?style=flat-square)](https://www.npmjs.com/package/audio-context-timers)
-[![version](https://img.shields.io/npm/v/audio-context-timers.svg?style=flat-square)](https://www.npmjs.com/package/audio-context-timers)
+[![version](https://img.shields.io/npm/v/audio-context-timers.svg?style=flat-square)](https://www.npmjs.com/package/audio-context-timers) [![Greenkeeper badge](https://badges.greenkeeper.io/chrisguttandin/audio-context-timers.svg)](https://greenkeeper.io/)
 
 ## Motivation
 
