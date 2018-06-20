@@ -11,7 +11,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "fast-unique-numbers": "^2.0.3",
-    "standardized-audio-context": "^12.1.19",
+    "standardized-audio-context": "^12.1.20",
     "tslib": "^1.9.2"
   },
   "description": "A replacement for setInterval() and setTimeout() which works in unfocused windows.",
