@@ -65,13 +65,13 @@
   ],
   "homepage": "https://github.com/chrisguttandin/audio-context-timers",
   "keywords": [
-    "Web Audio API",
-    "WindowTimers",
     "clearInterval",
     "clearTimeout",
     "interval",
     "setInterval",
-    "setTimeout"
+    "setTimeout",
+    "Web Audio API",
+    "WindowTimers"
   ],
   "license": "MIT",
   "main": "build/es5/bundle.js",
