@@ -63,14 +63,20 @@
     "src/"
   ],
   "homepage": "https://github.com/chrisguttandin/audio-context-timers",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --edit --extends @commitlint/config-angular",
+      "pre-commit": "grunt lint"
+    }
+  },
   "keywords": [
+    "Web Audio API",
+    "WindowTimers",
     "clearInterval",
     "clearTimeout",
     "interval",
     "setInterval",
-    "setTimeout",
-    "Web Audio API",
-    "WindowTimers"
+    "setTimeout"
   ],
   "license": "MIT",
   "main": "build/es5/bundle.js",
@@ -81,8 +87,6 @@
     "url": "https://github.com/chrisguttandin/audio-context-timers.git"
   },
   "scripts": {
-    "commitmsg": "commitlint --edit --extends @commitlint/config-angular",
-    "precommit": "grunt lint",
     "prepublishOnly": "grunt build",
     "test": "grunt lint && grunt test"
   },
