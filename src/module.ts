@@ -1,12 +1,12 @@
 import { generateUniqueNumber } from 'fast-unique-numbers';
-import { AudioContext, isSupported } from 'standardized-audio-context';
+import { AudioBuffer, AudioBufferSourceNode, MinimalAudioContext, isSupported } from 'standardized-audio-context';
 import { TFunctionMap, TTimerType } from './types';
 
-const AUDIO_CONTEXT = new AudioContext();
+const MINIMAL_AUDIO_CONTEXT = new MinimalAudioContext();
 
-const AUDIO_BUFFER = AUDIO_CONTEXT.createBuffer(1, 2, AUDIO_CONTEXT.sampleRate);
+const AUDIO_BUFFER = new AudioBuffer({ length: 2, sampleRate: MINIMAL_AUDIO_CONTEXT.sampleRate });
 
-const SAMPLE_DURATION = 2 / AUDIO_CONTEXT.sampleRate;
+const SAMPLE_DURATION = 2 / MINIMAL_AUDIO_CONTEXT.sampleRate;
 
 const SCHEDULED_TIMEOUT_FUNCTIONS: TFunctionMap = new Map();
 
@@ -31,9 +31,8 @@ const callIntervalFunction = (id: number, type: TTimerType) => {
 const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
     const now = performance.now();
 
-    const audioBufferSourceNode = AUDIO_CONTEXT.createBufferSource();
+    const audioBufferSourceNode = new AudioBufferSourceNode(MINIMAL_AUDIO_CONTEXT, { buffer: AUDIO_BUFFER });
 
-    audioBufferSourceNode.buffer = AUDIO_BUFFER;
     audioBufferSourceNode.onended = () => {
         const elapsedTime = performance.now() - now;
 
@@ -43,8 +42,8 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
             scheduleFunction(id, delay - elapsedTime, type);
         }
     };
-    audioBufferSourceNode.connect(AUDIO_CONTEXT.destination);
-    audioBufferSourceNode.start(Math.max(0, AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION));
+    audioBufferSourceNode.connect(MINIMAL_AUDIO_CONTEXT.destination);
+    audioBufferSourceNode.start(Math.max(0, MINIMAL_AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION));
 };
 
 export const clearInterval = (id: number) => {
