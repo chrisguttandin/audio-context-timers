@@ -18,7 +18,7 @@ const callIntervalFunction = (id: number, type: TTimerType) => {
     if (functions.has(id)) {
         const func = functions.get(id);
 
-        if (func) {
+        if (func !== undefined) {
             func();
 
             if (type === 'timeout') {
