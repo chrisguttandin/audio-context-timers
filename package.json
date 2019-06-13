@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
-    "fast-unique-numbers": "^4.0.0",
+    "fast-unique-numbers": "^4.0.2",
     "standardized-audio-context": "^20.1.5",
     "tslib": "^1.9.3"
   },
