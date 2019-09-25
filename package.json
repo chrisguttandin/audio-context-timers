@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.0",
+    "@babel/runtime": "^7.6.2",
     "fast-unique-numbers": "^4.0.8",
     "standardized-audio-context": "^21.2.4",
     "tslib": "^1.10.0"
