@@ -57,8 +57,8 @@ module.exports = (config) => {
 
             browsers: [
                 // @todo 'ChromeBrowserStack',
-                'FirefoxBrowserStack',
-                'SafariBrowserStack'
+                'FirefoxBrowserStack'
+                // @todo 'SafariBrowserStack'
             ],
 
             captureTimeout: 120000,
