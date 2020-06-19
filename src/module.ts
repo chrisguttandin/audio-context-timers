@@ -13,7 +13,7 @@ const SCHEDULED_TIMEOUT_FUNCTIONS: TFunctionMap = new Map();
 const SCHEDULED_INTERVAL_FUNCTIONS: TFunctionMap = new Map();
 
 const callIntervalFunction = (id: number, type: TTimerType) => {
-    const functions = (type === 'interval') ? SCHEDULED_INTERVAL_FUNCTIONS : SCHEDULED_TIMEOUT_FUNCTIONS;
+    const functions = type === 'interval' ? SCHEDULED_INTERVAL_FUNCTIONS : SCHEDULED_TIMEOUT_FUNCTIONS;
 
     if (functions.has(id)) {
         const func = functions.get(id);
@@ -43,7 +43,7 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
         }
     };
     audioBufferSourceNode.connect(MINIMAL_AUDIO_CONTEXT.destination);
-    audioBufferSourceNode.start(Math.max(0, MINIMAL_AUDIO_CONTEXT.currentTime + (delay / 1000) - SAMPLE_DURATION));
+    audioBufferSourceNode.start(Math.max(0, MINIMAL_AUDIO_CONTEXT.currentTime + delay / 1000 - SAMPLE_DURATION));
 };
 
 export const clearInterval = (id: number) => {

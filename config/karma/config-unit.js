@@ -1,9 +1,7 @@
 const { env } = require('process');
 
 module.exports = (config) => {
-
     config.set({
-
         concurrency: 2,
 
         files: [
@@ -16,10 +14,7 @@ module.exports = (config) => {
             '../../test/unit/**/*.js'
         ],
 
-        frameworks: [
-            'mocha',
-            'sinon-chai'
-        ],
+        frameworks: ['mocha', 'sinon-chai'],
 
         preprocessors: {
             '../../test/unit/**/*.js': 'webpack'
@@ -28,28 +23,27 @@ module.exports = (config) => {
         webpack: {
             mode: 'development',
             module: {
-                rules: [ {
-                    test: /\.ts?$/,
-                    use: {
-                        loader: 'ts-loader'
+                rules: [
+                    {
+                        test: /\.ts?$/,
+                        use: {
+                            loader: 'ts-loader'
+                        }
                     }
-                } ]
+                ]
             },
             resolve: {
-                extensions: [ '.js', '.ts' ]
+                extensions: ['.js', '.ts']
             }
         },
 
         webpackMiddleware: {
             noInfo: true
         }
-
     });
 
     if (env.TRAVIS) {
-
         config.set({
-
             browserStack: {
                 accessKey: env.BROWSER_STACK_ACCESS_KEY,
                 username: env.BROWSER_STACK_USERNAME
@@ -85,13 +79,9 @@ module.exports = (config) => {
             },
 
             tunnelIdentifier: env.TRAVIS_JOB_NUMBER
-
         });
-
     } else {
-
         config.set({
-
             browsers: [
                 'ChromeCanaryHeadlessWithNoRequiredUserGesture',
                 'ChromeHeadlessWithNoRequiredUserGesture',
@@ -103,16 +93,13 @@ module.exports = (config) => {
             customLaunchers: {
                 ChromeCanaryHeadlessWithNoRequiredUserGesture: {
                     base: 'ChromeCanaryHeadless',
-                    flags: [ '--autoplay-policy=no-user-gesture-required' ]
+                    flags: ['--autoplay-policy=no-user-gesture-required']
                 },
                 ChromeHeadlessWithNoRequiredUserGesture: {
                     base: 'ChromeHeadless',
-                    flags: [ '--autoplay-policy=no-user-gesture-required' ]
+                    flags: ['--autoplay-policy=no-user-gesture-required']
                 }
             }
-
         });
-
     }
-
 };

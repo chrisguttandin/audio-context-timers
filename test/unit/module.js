@@ -1,9 +1,7 @@
 import * as audioContextTimers from '../../src/module';
 
 describe('module', () => {
-
     describe('clearInterval()', () => {
-
         it('should not call the function after clearing the interval', (done) => {
             const id = audioContextTimers.setInterval(() => {
                 throw new Error('this should never be called');
@@ -28,11 +26,9 @@ describe('module', () => {
             // Wait 200ms to be sure the function gets not called anymore.
             setTimeout(done, 200);
         });
-
     });
 
     describe('clearTimeout()', () => {
-
         it('should not call the function after clearing the timeout', (done) => {
             const id = audioContextTimers.setTimeout(() => {
                 throw new Error('this should never be called');
@@ -43,11 +39,9 @@ describe('module', () => {
             // Wait 200ms to be sure the function never gets called.
             setTimeout(done, 200);
         });
-
     });
 
     describe('setInterval()', () => {
-
         let id;
 
         afterEach(() => {
@@ -66,7 +60,7 @@ describe('module', () => {
             let before = performance.now();
             let calls = 0;
 
-            function func () {
+            function func() {
                 const now = performance.now();
                 const elapsed = now - before;
 
@@ -83,11 +77,9 @@ describe('module', () => {
 
             id = audioContextTimers.setInterval(func, 100);
         });
-
     });
 
     describe('setTimeout()', () => {
-
         let id;
 
         afterEach(() => {
@@ -103,7 +95,7 @@ describe('module', () => {
         it('should postpone a function for the given delay', (done) => {
             const before = performance.now();
 
-            function func () {
+            function func() {
                 const elapsed = performance.now() - before;
 
                 expect(elapsed).to.be.at.least(100);
@@ -113,7 +105,5 @@ describe('module', () => {
 
             id = audioContextTimers.setTimeout(func, 100);
         });
-
     });
-
 });
