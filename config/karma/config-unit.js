@@ -103,8 +103,8 @@ module.exports = (config) => {
             browsers: [
                 'ChromeCanaryHeadlessWithNoRequiredUserGesture',
                 'ChromeHeadlessWithNoRequiredUserGesture',
-                'FirefoxDeveloperHeadless',
-                'FirefoxHeadless',
+                'FirefoxDeveloperWithPrefs',
+                'FirefoxWithPrefs',
                 'Safari'
             ],
 
@@ -116,6 +116,18 @@ module.exports = (config) => {
                 ChromeHeadlessWithNoRequiredUserGesture: {
                     base: 'ChromeHeadless',
                     flags: ['--autoplay-policy=no-user-gesture-required']
+                },
+                FirefoxDeveloperWithPrefs: {
+                    base: 'FirefoxDeveloperHeadless',
+                    prefs: {
+                        'media.autoplay.block-webaudio': false
+                    }
+                },
+                FirefoxWithPrefs: {
+                    base: 'FirefoxHeadless',
+                    prefs: {
+                        'media.autoplay.block-webaudio': false
+                    }
                 }
             }
         });
