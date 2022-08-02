@@ -84,17 +84,38 @@ module.exports = (config) => {
                 video: false
             },
 
-            browsers: ['FirefoxBrowserStack'],
+            browsers:
+                env.TARGET === 'chrome'
+                    ? ['ChromeBrowserStack']
+                    : env.TARGET === 'firefox'
+                    ? ['FirefoxBrowserStack']
+                    : env.TARGET === 'safari'
+                    ? ['SafariBrowserStack']
+                    : ['ChromeBrowserStack', 'FirefoxBrowserStack', 'SafariBrowserStack'],
 
             captureTimeout: 300000,
 
             customLaunchers: {
+                ChromeBrowserStack: {
+                    base: 'BrowserStack',
+                    browser: 'chrome',
+                    captureTimeout: 300,
+                    os: 'OS X',
+                    os_version: 'Big Sur' // eslint-disable-line camelcase
+                },
                 FirefoxBrowserStack: {
                     base: 'BrowserStack',
                     browser: 'firefox',
                     captureTimeout: 300,
                     os: 'Windows',
                     os_version: '10' // eslint-disable-line camelcase
+                },
+                SafariBrowserStack: {
+                    base: 'BrowserStack',
+                    browser: 'safari',
+                    captureTimeout: 300,
+                    os: 'OS X',
+                    os_version: 'Big Sur' // eslint-disable-line camelcase
                 }
             }
         });
