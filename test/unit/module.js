@@ -54,29 +54,33 @@ describe('module', () => {
             expect(id).to.be.a('number');
         });
 
-        it('should constantly call a function with the given delay', function (done) {
-            this.timeout(4000);
+        // @todo There is currently no way to disable the autoplay policy on BrowserStack or Sauce Labs.
+        // eslint-disable-next-line no-undef
+        if (!process.env.CI) {
+            it('should constantly call a function with the given delay', function (done) {
+                this.timeout(4000);
 
-            let before = performance.now();
-            let calls = 0;
+                let before = performance.now();
+                let calls = 0;
 
-            function func() {
-                const now = performance.now();
-                const elapsed = now - before;
+                function func() {
+                    const now = performance.now();
+                    const elapsed = now - before;
 
-                expect(elapsed).to.be.at.least(100);
+                    expect(elapsed).to.be.at.least(100);
 
-                // Test five calls.
-                if (calls > 4) {
-                    done();
+                    // Test five calls.
+                    if (calls > 4) {
+                        done();
+                    }
+
+                    before = now;
+                    calls += 1;
                 }
 
-                before = now;
-                calls += 1;
-            }
-
-            id = audioContextTimers.setInterval(func, 100);
-        });
+                id = audioContextTimers.setInterval(func, 100);
+            });
+        }
     });
 
     describe('setTimeout()', () => {
@@ -92,18 +96,22 @@ describe('module', () => {
             expect(id).to.be.a('number');
         });
 
-        it('should postpone a function for the given delay', (done) => {
-            const before = performance.now();
+        // @todo There is currently no way to disable the autoplay policy on BrowserStack or Sauce Labs.
+        // eslint-disable-next-line no-undef
+        if (!process.env.CI) {
+            it('should postpone a function for the given delay', (done) => {
+                const before = performance.now();
 
-            function func() {
-                const elapsed = performance.now() - before;
+                function func() {
+                    const elapsed = performance.now() - before;
 
-                expect(elapsed).to.be.at.least(100);
+                    expect(elapsed).to.be.at.least(100);
 
-                done();
-            }
+                    done();
+                }
 
-            id = audioContextTimers.setTimeout(func, 100);
-        });
+                id = audioContextTimers.setTimeout(func, 100);
+            });
+        }
     });
 });
