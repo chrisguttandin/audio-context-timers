@@ -2,7 +2,6 @@
 
 **A replacement for setInterval() and setTimeout() which works in unfocused windows.**
 
-[![dependencies](https://img.shields.io/david/chrisguttandin/audio-context-timers.svg?style=flat-square)](https://github.com/chrisguttandin/audio-context-timers/network/dependencies)
 [![version](https://img.shields.io/npm/v/audio-context-timers.svg?style=flat-square)](https://www.npmjs.com/package/audio-context-timers)
 
 ## Motivation
