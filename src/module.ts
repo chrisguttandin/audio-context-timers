@@ -41,6 +41,8 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
         } else {
             scheduleFunction(id, delay - elapsedTime, type);
         }
+
+        audioBufferSourceNode.disconnect(MINIMAL_AUDIO_CONTEXT.destination);
     };
     audioBufferSourceNode.connect(MINIMAL_AUDIO_CONTEXT.destination);
     audioBufferSourceNode.start(Math.max(0, MINIMAL_AUDIO_CONTEXT.currentTime + delay / 1000 - SAMPLE_DURATION));
