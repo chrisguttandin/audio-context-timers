@@ -141,13 +141,13 @@ module.exports = (config) => {
                 FirefoxDeveloperWithPrefs: {
                     base: 'FirefoxDeveloperHeadless',
                     prefs: {
-                        'media.autoplay.block-webaudio': false
+                        'media.autoplay.default': 0
                     }
                 },
                 FirefoxWithPrefs: {
                     base: 'FirefoxHeadless',
                     prefs: {
-                        'media.autoplay.block-webaudio': false
+                        'media.autoplay.default': 0
                     }
                 }
             }
