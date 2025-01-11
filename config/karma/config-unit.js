@@ -88,10 +88,10 @@ module.exports = (config) => {
                 env.TARGET === 'chrome'
                     ? ['ChromeBrowserStack']
                     : env.TARGET === 'firefox'
-                    ? ['FirefoxBrowserStack']
-                    : env.TARGET === 'safari'
-                    ? ['SafariBrowserStack']
-                    : ['ChromeBrowserStack', 'FirefoxBrowserStack', 'SafariBrowserStack'],
+                      ? ['FirefoxBrowserStack']
+                      : env.TARGET === 'safari'
+                        ? ['SafariBrowserStack']
+                        : ['ChromeBrowserStack', 'FirefoxBrowserStack', 'SafariBrowserStack'],
 
             captureTimeout: 300000,
 
@@ -122,19 +122,19 @@ module.exports = (config) => {
     } else {
         config.set({
             browsers: [
-                'ChromeCanaryHeadlessWithNoRequiredUserGesture',
-                'ChromeHeadlessWithNoRequiredUserGesture',
+                'ChromeCanaryHeadlessWithFlags',
+                'ChromeHeadlessWithFlags',
                 'FirefoxDeveloperWithPrefs',
                 'FirefoxWithPrefs',
                 'Safari'
             ],
 
             customLaunchers: {
-                ChromeCanaryHeadlessWithNoRequiredUserGesture: {
+                ChromeCanaryHeadlessWithFlags: {
                     base: 'ChromeCanaryHeadless',
                     flags: ['--autoplay-policy=no-user-gesture-required']
                 },
-                ChromeHeadlessWithNoRequiredUserGesture: {
+                ChromeHeadlessWithFlags: {
                     base: 'ChromeHeadless',
                     flags: ['--autoplay-policy=no-user-gesture-required']
                 },
