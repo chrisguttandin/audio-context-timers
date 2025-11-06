@@ -25,13 +25,13 @@ module.exports = (config) => {
                 served: false,
                 watched: true
             },
-            'test/unit/**/*.js'
+            'test/integration/**/*.js'
         ],
 
         frameworks: ['mocha', 'sinon-chai'],
 
         preprocessors: {
-            'test/unit/**/*.js': 'webpack'
+            'test/integration/**/*.js': 'webpack'
         },
 
         reporters: ['dots'],
@@ -76,7 +76,7 @@ module.exports = (config) => {
         config.set({
             browserStack: {
                 accessKey: env.BROWSER_STACK_ACCESS_KEY,
-                build: `${env.GITHUB_RUN_ID}/unit-${env.TARGET}`,
+                build: `${env.GITHUB_RUN_ID}/integration-${env.TARGET}`,
                 forceLocal: true,
                 localIdentifier: `${Math.floor(Math.random() * 1000000)}`,
                 project: env.GITHUB_REPOSITORY,

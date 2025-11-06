@@ -77,15 +77,16 @@
         "url": "https://github.com/chrisguttandin/audio-context-timers.git"
     },
     "scripts": {
-        "build": "rimraf build/* && tsc --project src/tsconfig.json && rollup --config config/rollup/bundle.mjs",
+        "build": "rimraf build/* && tsc --project src/tsconfig.json && rollup --config config/rollup/bundle.mjs && babel ./build/es2019 --config-file ./config/babel/build.json --out-dir ./build/node",
         "lint": "npm run lint:config && npm run lint:src && npm run lint:test",
         "lint:config": "eslint --config config/eslint/config.json --ext .cjs --ext .js --ext .mjs --report-unused-disable-directives config/",
         "lint:src": "tslint --config config/tslint/src.json --project src/tsconfig.json src/*.ts src/**/*.ts",
         "lint:test": "eslint --config config/eslint/test.json --ext .js --report-unused-disable-directives test/",
         "prepare": "husky",
         "prepublishOnly": "npm run build",
-        "test": "npm run lint && npm run build && npm run test:unit",
-        "test:unit": "if [ \"$TYPE\" = \"\" -o \"$TYPE\" = \"unit\" ]; then karma start config/karma/config-unit.js --single-run; fi"
+        "test": "npm run lint && npm run build && npm run test:integration-browser && npm run test:integration-node",
+        "test:integration-browser": "if [ \"$TYPE\" = \"\" -o \"$TYPE\" = \"integration\" ] && [ \"$TARGET\" = \"\" -o \"$TARGET\" = \"chrome\" -o \"$TARGET\" = \"firefox\" -o \"$TARGET\" = \"safari\" ]; then karma start config/karma/config-integration.js --single-run; fi",
+        "test:integration-node": "if [ \"$TYPE\" = \"\" -o \"$TYPE\" = \"integration\" ] && [ \"$TARGET\" = \"\" -o \"$TARGET\" = \"node\" ]; then mocha --bail --parallel --recursive --require config/mocha/config-integration.js test/integration; fi"
     },
     "types": "build/es2019/module.d.ts",
     "version": "5.0.132"
