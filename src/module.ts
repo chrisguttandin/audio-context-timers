@@ -1,5 +1,6 @@
 import { generateUniqueNumber } from 'fast-unique-numbers';
 import { AudioBuffer, AudioBufferSourceNode, MinimalAudioContext, isSupported } from 'standardized-audio-context';
+import { createClearFunction } from './factories/clear-function';
 import { TFunctionMap, TTimerType } from './types';
 
 const MINIMAL_AUDIO_CONTEXT = new MinimalAudioContext();
@@ -48,13 +49,9 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
     audioBufferSourceNode.start(Math.max(0, MINIMAL_AUDIO_CONTEXT.currentTime + delay / 1000 - SAMPLE_DURATION));
 };
 
-export const clearInterval = (id: number) => {
-    SCHEDULED_INTERVAL_FUNCTIONS.delete(id);
-};
+export const clearInterval = createClearFunction(SCHEDULED_INTERVAL_FUNCTIONS);
 
-export const clearTimeout = (id: number) => {
-    SCHEDULED_TIMEOUT_FUNCTIONS.delete(id);
-};
+export const clearTimeout = createClearFunction(SCHEDULED_TIMEOUT_FUNCTIONS);
 
 export { isSupported };
 
