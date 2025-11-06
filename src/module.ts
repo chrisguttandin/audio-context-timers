@@ -1,5 +1,6 @@
 import { generateUniqueNumber } from 'fast-unique-numbers';
 import { AudioBuffer, AudioBufferSourceNode, MinimalAudioContext, isSupported } from 'standardized-audio-context';
+import { createCallFunction } from './factories/call-function';
 import { createClearFunction } from './factories/clear-function';
 import { TFunctionMap, TTimerType } from './types';
 
@@ -13,22 +14,8 @@ const SCHEDULED_TIMEOUT_FUNCTIONS: TFunctionMap = new Map();
 
 const SCHEDULED_INTERVAL_FUNCTIONS: TFunctionMap = new Map();
 
-const callIntervalFunction = (id: number, type: TTimerType) => {
-    const functions = type === 'interval' ? SCHEDULED_INTERVAL_FUNCTIONS : SCHEDULED_TIMEOUT_FUNCTIONS;
-
-    if (functions.has(id)) {
-        const func = functions.get(id);
-
-        if (func !== undefined) {
-            func();
-
-            if (type === 'timeout') {
-                SCHEDULED_TIMEOUT_FUNCTIONS.delete(id);
-            }
-        }
-    }
-};
-
+const callIntervalFunction = createCallFunction(SCHEDULED_INTERVAL_FUNCTIONS, 'interval');
+const callTimeoutFunction = createCallFunction(SCHEDULED_TIMEOUT_FUNCTIONS, 'timeout');
 const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
     const now = performance.now();
 
@@ -38,7 +25,7 @@ const scheduleFunction = (id: number, delay: number, type: TTimerType) => {
         const elapsedTime = performance.now() - now;
 
         if (elapsedTime >= delay) {
-            callIntervalFunction(id, type);
+            type === 'interval' ? callIntervalFunction(id) : callTimeoutFunction(id);
         } else {
             scheduleFunction(id, delay - elapsedTime, type);
         }
