@@ -15,7 +15,7 @@ describe('module', () => {
                 clearInterval(id);
 
                 // Wait 200ms to be sure the function never gets called.
-                setTimeout(done, 200);
+                window.setTimeout(done, 200);
             });
 
             it('should not call the function anymore after clearing the interval after the first callback', (done) => {
@@ -29,7 +29,7 @@ describe('module', () => {
                 }, 50);
 
                 // Wait 200ms to be sure the function gets not called anymore.
-                setTimeout(done, 200);
+                window.setTimeout(done, 200);
             });
         }
     });
@@ -48,7 +48,7 @@ describe('module', () => {
                 clearTimeout(id);
 
                 // Wait 200ms to be sure the function never gets called.
-                setTimeout(done, 200);
+                window.setTimeout(done, 200);
             });
         }
     });
