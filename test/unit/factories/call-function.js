@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from 'vitest';
 import { createCallFunction } from '../../../src/factories/call-function';
 import { spy } from 'sinon';
 

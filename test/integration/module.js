@@ -1,3 +1,4 @@
+import { afterEach, describe, expect, it } from 'vitest';
 import { clearInterval, clearTimeout, setInterval, setTimeout } from '../../src/module';
 
 describe('module', () => {
@@ -7,7 +8,8 @@ describe('module', () => {
         });
 
         if (typeof window !== 'undefined') {
-            it('should not call the function after clearing the interval', (done) => {
+            it('should not call the function after clearing the interval', () => {
+                const { promise, resolve } = Promise.withResolvers();
                 const id = setInterval(() => {
                     throw new Error('this should never be called');
                 }, 100);
@@ -15,10 +17,14 @@ describe('module', () => {
                 clearInterval(id);
 
                 // Wait 200ms to be sure the function never gets called.
-                window.setTimeout(done, 200);
+                window.setTimeout(resolve, 200);
+
+                return promise;
             });
 
-            it('should not call the function anymore after clearing the interval after the first callback', (done) => {
+            it('should not call the function anymore after clearing the interval after the first callback', () => {
+                const { promise, resolve } = Promise.withResolvers();
+
                 let id = setInterval(() => {
                     if (id === null) {
                         throw new Error('this should never be called');
@@ -29,7 +35,9 @@ describe('module', () => {
                 }, 50);
 
                 // Wait 200ms to be sure the function gets not called anymore.
-                window.setTimeout(done, 200);
+                window.setTimeout(resolve, 200);
+
+                return promise;
             });
         }
     });
@@ -40,7 +48,8 @@ describe('module', () => {
         });
 
         if (typeof window !== 'undefined') {
-            it('should not call the function after clearing the timeout', (done) => {
+            it('should not call the function after clearing the timeout', () => {
+                const { promise, resolve } = Promise.withResolvers();
                 const id = setTimeout(() => {
                     throw new Error('this should never be called');
                 }, 100);
@@ -48,7 +57,9 @@ describe('module', () => {
                 clearTimeout(id);
 
                 // Wait 200ms to be sure the function never gets called.
-                window.setTimeout(done, 200);
+                window.setTimeout(resolve, 200);
+
+                return promise;
             });
         }
     });
@@ -71,33 +82,31 @@ describe('module', () => {
                 expect(id).to.be.a('number');
             });
 
-            // @todo There is currently no way to disable the autoplay policy on BrowserStack or Sauce Labs.
-            // eslint-disable-next-line no-undef
-            if (!process.env.CI) {
-                it('should constantly call a function with the given delay', function (done) {
-                    this.timeout(4000);
+            it('should constantly call a function with the given delay', () => {
+                const { promise, resolve } = Promise.withResolvers();
 
-                    let before = performance.now();
-                    let calls = 0;
+                let before = performance.now();
+                let calls = 0;
 
-                    function func() {
-                        const now = performance.now();
-                        const elapsed = now - before;
+                function func() {
+                    const now = performance.now();
+                    const elapsed = now - before;
 
-                        expect(elapsed).to.be.at.least(100);
+                    expect(elapsed).to.be.at.least(100);
 
-                        // Test five calls.
-                        if (calls > 4) {
-                            done();
-                        }
-
-                        before = now;
-                        calls += 1;
+                    // Test five calls.
+                    if (calls > 4) {
+                        resolve();
                     }
 
-                    id = setInterval(func, 100);
-                });
-            }
+                    before = now;
+                    calls += 1;
+                }
+
+                id = setInterval(func, 100);
+
+                return promise;
+            });
         }
     });
 
@@ -119,23 +128,22 @@ describe('module', () => {
                 expect(id).to.be.a('number');
             });
 
-            // @todo There is currently no way to disable the autoplay policy on BrowserStack or Sauce Labs.
-            // eslint-disable-next-line no-undef
-            if (!process.env.CI) {
-                it('should postpone a function for the given delay', (done) => {
-                    const before = performance.now();
+            it('should postpone a function for the given delay', () => {
+                const { promise, resolve } = Promise.withResolvers();
+                const before = performance.now();
 
-                    function func() {
-                        const elapsed = performance.now() - before;
+                function func() {
+                    const elapsed = performance.now() - before;
 
-                        expect(elapsed).to.be.at.least(100);
+                    expect(elapsed).to.be.at.least(100);
 
-                        done();
-                    }
+                    resolve();
+                }
 
-                    id = setTimeout(func, 100);
-                });
-            }
+                id = setTimeout(func, 100);
+
+                return promise;
+            });
         }
     });
 });
