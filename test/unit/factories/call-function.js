@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createCallFunction } from '../../../src/factories/call-function';
-import { spy } from 'sinon';
 
 describe('callFunction()', () => {
     let func;
@@ -8,7 +7,7 @@ describe('callFunction()', () => {
     let id;
 
     beforeEach(() => {
-        func = spy();
+        func = vi.fn();
         id = 17;
         functions = new Map([[id, func]]);
     });
